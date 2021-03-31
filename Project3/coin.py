@@ -26,7 +26,7 @@ ret, coin = cv2.threshold(img_gray, 85, 255, cv2.THRESH_BINARY)     #二值化
 #cv2.imshow("coin_binary", coin)
 
 coin = cv2.GaussianBlur(coin, (1, 1), 0)
-cv2.imshow("coin1", coin)
+#cv2.imshow("coin1", coin)
 coin = cv2.erode(coin, np.ones((2, 2)), iterations = 5)
 #cv2.imshow("coin2", coin)
 coin = cv2.dilate(coin, np.ones((1, 1)), iterations = 5)

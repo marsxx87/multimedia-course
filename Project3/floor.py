@@ -5,7 +5,8 @@ import numpy as np
 floor_ori = cv2.imread("pic/floor.jpg")
 # cv2.imshow("floor_ori", floor_ori)
 floor_resize = cv2.resize(floor_ori, (360, 640), interpolation = cv2.INTER_AREA)
-# cv2.imshow("floor_resize", floor_resize)
+floor_resize0 = cv2.resize(floor_ori, (360, 640), interpolation = cv2.INTER_AREA)
+# cv2.imshow("floor_resize0", floor_resize0)
 
 #-----灰階處理-----
 floor_gray = cv2.cvtColor(floor_resize, cv2.COLOR_BGR2GRAY)
@@ -26,7 +27,7 @@ floor_blur = cv2.bilateralFilter(floor_gray, 50, 15, 25)   #雙邊濾波 (臨域
 
 
 #-----二值化-----
-ret, floor_binary = cv2.threshold(floor_blur, 119, 255, cv2.THRESH_BINARY)
+ret, floor_binary = cv2.threshold(floor_blur, 119, 255, cv2.THRESH_BINARY_INV)
 cv2.imshow("floor_binary", floor_binary)
 
 '''
@@ -46,7 +47,7 @@ for line in lines:
     x0, y0 = a*rad, b*rad
     x1, y1 = int(x0 + 1000 * (-b)), int(y0 - 1000 *a)
     x2, y2 = int(x0 - 1000 * (-b)), int(y0 + 1000 *a)
-    cv2.line(floor_resize, (x1, y1), (x2, y2), (0, 0, 255), 1)
+    cv2.line(floor_resize, (x1, y1), (x2, y2), (0, 0, 255), 2)
 
 cv2.imshow("floor_resize", floor_resize)
 
