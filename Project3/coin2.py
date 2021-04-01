@@ -37,6 +37,8 @@ ret, coin = cv2.threshold(img_gray, 85, 255, cv2.THRESH_BINARY)
 coin = cv2.GaussianBlur(coin, (1, 1), 0)
 coin = cv2.erode(coin, np.ones((2, 2)), iterations = 2)
 
+cv2.imshow("coin", coin)
+
 # connected components
 num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(coin, connectivity = 8, ltype = None)
 
