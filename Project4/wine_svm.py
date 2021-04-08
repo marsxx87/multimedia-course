@@ -14,19 +14,23 @@ total_wine = wine.data.shape[0] # total_wine = 178
 X = []
 for i in range(total_wine):
     row = []
-    row.append(wine.data[i, 0]) # take the value of alchohol for input
+    row.append(wine.data[i, 2]) # take the value of alchohol for input
     X.append(row)
 
 Y = wine.target
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state = 4)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state = 2)
+#test_size:訓練集測試集分割比例     #random_state:打亂資料集
 
-clf = svm.SVC(kernel = 'linear', C = 1, gamma = 'auto')
+clf = svm.SVC(kernel = 'linear', C = 3, gamma = 'auto')
+#
 clf.fit(X_train, Y_train)
 
-print("predict")
-print(clf.predict(X_train)) # target = Y_train
-print(clf.predict(X_test)) # target = Y_test
+#p.24
+# print("predict")
+# print(clf.predict(X_train)) # target = Y_train
+# print(clf.predict(X_test)) # target = Y_test
 
+#p.24
 print("Accuracy")
-print(clf.score(X_train, Y_train))
-print(clf.score(X_test, Y_test))
+print("Train accuracy:", clf.score(X_train, Y_train))  #訓練資料準確率
+print("Test accuracy :", clf.score(X_test, Y_test))    #測試資料準確率
