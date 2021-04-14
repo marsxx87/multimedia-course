@@ -17,7 +17,7 @@ target_people = lfw_people['target']
 hogged_people = []
 for image in image_people:
     fd, hog_image = hog(image, orientations = 8, pixels_per_cell = (9, 9),
-                        cells_per_block=(1, 1), visualize=True,)
+                        cells_per_block=(1, 1), visualize=True, multichannel = False)
     hogged_people.append(fd)
 
 # split some data to be the test data
