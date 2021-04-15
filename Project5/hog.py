@@ -18,7 +18,7 @@ target_people = lfw_people['target']
 # append hogged image to list of hogged people
 hogged_people = []
 for image in image_people:
-    fd, hog_image = hog(image, orientations = 8, pixels_per_cell = (9, 9),
+    fd, hog_image = hog(image, orientations = 8, pixels_per_cell = (2, 2),
                         cells_per_block=(1, 1), visualize=True, multichannel = False)
     hogged_people.append(fd)
 
