@@ -1,25 +1,16 @@
-import matplotlib.pyplot as plt
-from skimage.feature import hog
-from skimage import data, exposure
+import numpy as np
+import cv2 as cv
 
-image = data.astronaut()
+img = cv.imread('house.jpg')
+img = cv.resize(img, (1200, 800))
+gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+gray = np.float32(gray)
+dst = cv.cornerHarris(gray, 2, 1, 0.16)
+# result is dilated for marking thr corners, not important
+dst = cv.dilate(dst, None)
+# Threshold for an optimal value, it may vary depending on the image
+img[dst > 0.01 * dst.max()] = [0, 0, 255]
 
-fd, hog_image = hog(image,
-                    orientations = 8, 
-                    pixels_per_cell = (16, 16),
-                    cells_per_block = (1, 1),
-                    block_norm = 'L2',
-                    visualize = True,
-                    multichannel = True)
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (8, 4), sharex = True, sharey = True)
-
-ax1.axis('off')
-ax1.imshow(image, cmap = plt.cm.gray)
-ax1.set_title('Input image')
-
-hog_image_rescaled = exposure.rescale_intensity(hog_image, in_range = (0, 10))
-
-ax2.axis('off')
-ax2.imshow(hog_image_rescaled, cmap = plt.cm.gray)
-ax2.set_title('Histogram of Oriented Gradients')
-plt.show()
+cv.imshow('result', img)
+cv.waitKey(0)
+cv.destroyAllWindows()
